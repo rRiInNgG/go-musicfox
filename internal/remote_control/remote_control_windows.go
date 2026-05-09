@@ -14,6 +14,7 @@ import (
 	"github.com/saltosystems/winrt-go/windows/media/playback"
 	"github.com/saltosystems/winrt-go/windows/storage/streams"
 
+	"github.com/go-musicfox/go-musicfox/internal/configs"
 	"github.com/go-musicfox/go-musicfox/internal/types"
 	. "github.com/go-musicfox/go-musicfox/utils/errorx"
 )
@@ -44,14 +45,19 @@ var (
 )
 
 type RemoteControl struct {
-	p    Controller
-	smtc *media.SystemMediaTransportControls
+	p       Controller
+	smtc    *media.SystemMediaTransportControls
+	enabled bool
 
 	lastPlayingInfo  PlayingInfo
 	lastPlayingInfoL sync.Mutex
 }
 
 func NewRemoteControl(p Controller, _ PlayingInfo) *RemoteControl {
+	if !configs.AppConfig.Main.Lyric.Desktop.Enable {
+		return &RemoteControl{}
+	}
+
 	_ = ole.RoInitialize(1)
 
 	if SMTC == nil {
@@ -60,8 +66,9 @@ func NewRemoteControl(p Controller, _ PlayingInfo) *RemoteControl {
 	}
 
 	c := &RemoteControl{
-		p:    p,
-		smtc: SMTC,
+		p:       p,
+		smtc:    SMTC,
+		enabled: true,
 	}
 
 	c.registerEventHandlers()
@@ -102,7 +109,7 @@ func (c *RemoteControl) registerEventHandlers() {
 }
 
 func (c *RemoteControl) SetPosition(pos time.Duration) {
-	if c.smtc == nil {
+	if !c.enabled || c.smtc == nil {
 		return
 	}
 	c.lastPlayingInfoL.Lock()
@@ -112,7 +119,7 @@ func (c *RemoteControl) SetPosition(pos time.Duration) {
 }
 
 func (c *RemoteControl) SetPlayingInfo(info PlayingInfo) {
-	if c.smtc == nil {
+	if !c.enabled || c.smtc == nil {
 		return
 	}
 	Must(c.smtc.SetPlaybackStatus(stateMap[info.State]))
@@ -143,7 +150,7 @@ func (c *RemoteControl) SetPlayingInfo(info PlayingInfo) {
 }
 
 func (c *RemoteControl) Release() {
-	if c.smtc != nil {
+	if c.enabled && c.smtc != nil {
 		c.smtc.Release()
 	}
 }

@@ -11,6 +11,7 @@ import (
 	"github.com/mattn/go-runewidth"
 
 	"github.com/go-musicfox/go-musicfox/internal/configs"
+	desktoplyric "github.com/go-musicfox/go-musicfox/internal/desktop_lyric"
 	"github.com/go-musicfox/go-musicfox/internal/storage"
 	"github.com/go-musicfox/go-musicfox/internal/types"
 	"github.com/go-musicfox/go-musicfox/internal/ui"
@@ -42,6 +43,7 @@ func runPlayer(_ *gcli.Command, _ []string) error {
 	http.DefaultClient.Timeout = types.AppHttpTimeout
 	neteaseutil.HTTPClientTimeout = types.AppHttpTimeout
 	runewidth.DefaultCondition.EastAsianWidth = false
+	desktoplyric.AutoStart()
 
 	opts := model.DefaultOptions()
 	configs.AppConfig.FillToModelOpts(opts)
