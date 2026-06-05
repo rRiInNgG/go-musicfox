@@ -55,19 +55,6 @@ skipParseErr = false
 # 可选: "simple"(简单，默认), "smooth"(平滑), "wave"(波浪), "glow"(发光)
 renderMode = "smooth"
 
-# 外部桌面歌词工具设置
-[main.lyric.desktop]
-# 是否向系统媒体控件发布播放信息，供 Lyricify Lite 等桌面歌词工具识别
-# Windows 下关闭后，Lyricify Lite 无法识别 go-musicfox，系统媒体浮层/媒体键也可能受影响
-enable = true
-# 是否在启动 go-musicfox 时自动拉起外部桌面歌词工具
-autoStart = true
-# 外部桌面歌词工具启动命令；为空时 Windows 下会尝试查找 Lyricify Lite
-# 如果自动查找失败，请填写 Lyricify Lite.exe 的绝对路径
-command = "C:\\Users\\admin\\AppData\\Local\\Lyricify Lite\\Lyricify Lite.exe"
-# 外部桌面歌词工具启动参数
-args = []
-
 # 封面图显示设置（需要支持Kitty图形协议的终端，如Kitty、WezTerm、Ghostty等）
 [main.lyric.cover]
 # 是否显示封面图

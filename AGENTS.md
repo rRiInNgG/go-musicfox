@@ -171,7 +171,7 @@ type Player interface {
 
 - **歌词**：LRC/YRC 格式，支持 smooth/wave/glow 渲染模式
 - **播放列表**：列表循环/顺序/单曲循环/随机/无限随机/智能心动模式
-- **远程控制**：MPRIS(linux)、Now Playing(macOS)、System Media(Windows)，Windows 可通过 `main.lyric.desktop.enable` 控制是否向 SMTC 发布播放信息以对接 Lyricify Lite 等桌面歌词工具，并可通过 `main.lyric.desktop.autoStart` 自动拉起外部桌面歌词工具
+- **远程控制**：MPRIS(linux)、Now Playing(macOS)、System Media(Windows)
 - **存储**：BoltDB，存储用户信息、播放状态、播放列表快照
 
 ## 开发指南

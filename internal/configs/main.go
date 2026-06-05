@@ -71,22 +71,8 @@ type LyricConfig struct {
 	SkipParseErr bool `koanf:"skipParseErr"`
 	// 歌词渲染模式：smooth(平滑), wave(波浪), glow(发光)
 	RenderMode string `koanf:"renderMode"`
-	// 桌面歌词设置
-	Desktop DesktopLyricConfig `koanf:"desktop"`
 	// 封面图设置
 	Cover CoverConfig `koanf:"cover"`
-}
-
-// DesktopLyricConfig 外部桌面歌词工具相关设置
-type DesktopLyricConfig struct {
-	// 是否向系统媒体控件发布播放信息，供 Lyricify Lite 等桌面歌词工具识别
-	Enable bool `koanf:"enable"`
-	// 是否启动时自动拉起外部桌面歌词工具
-	AutoStart bool `koanf:"autoStart"`
-	// 外部桌面歌词工具启动命令，为空时尝试查找 Lyricify Lite
-	Command string `koanf:"command"`
-	// 外部桌面歌词工具启动参数
-	Args []string `koanf:"args"`
 }
 
 // CoverConfig 封面图显示设置
