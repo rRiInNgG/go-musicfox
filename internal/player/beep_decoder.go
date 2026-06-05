@@ -5,12 +5,10 @@ import (
 
 	"github.com/gopxl/beep"
 	"github.com/gopxl/beep/flac"
-	"github.com/gopxl/beep/minimp3"
 	"github.com/gopxl/beep/mp3"
 	"github.com/gopxl/beep/vorbis"
 	"github.com/gopxl/beep/wav"
 	"github.com/pkg/errors"
-	minimp3pkg "github.com/tosone/minimp3"
 
 	"github.com/go-musicfox/go-musicfox/internal/configs"
 	"github.com/go-musicfox/go-musicfox/internal/types"
@@ -21,8 +19,8 @@ func DecodeSong(t SongType, r io.ReadSeekCloser) (streamer beep.StreamSeekCloser
 	case Mp3:
 		switch configs.AppConfig.Player.Beep.Mp3Decoder {
 		case types.BeepMiniMp3Decoder:
-			minimp3pkg.BufferSize = 1024 * 50
-			streamer, format, err = minimp3.Decode(r)
+			// 调用平台特定的 minimp3 解码函数
+			return decodeMinimp3(r)
 		default:
 			streamer, format, err = mp3.Decode(r)
 		}
