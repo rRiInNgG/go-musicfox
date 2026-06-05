@@ -118,6 +118,9 @@ func (c *RemoteControl) SetPosition(pos time.Duration) {
 	c.setTimelineProps(c.lastPlayingInfo)
 }
 
+func (c *RemoteControl) EmitSeeked(time.Duration) {
+}
+
 func (c *RemoteControl) SetPlayingInfo(info PlayingInfo) {
 	if !c.enabled || c.smtc == nil {
 		return
