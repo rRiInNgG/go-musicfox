@@ -661,3 +661,11 @@ See [CHANGELOG.md](./CHANGELOG.md)
 * ...
 
 [![Star History Chart](https://api.star-history.com/svg?repos=go-musicfox/go-musicfox&type=Date)](https://star-history.com/#go-musicfox/go-musicfox&Date)
+
+
+
+``` shell
+go mod tidy
+go mod vendor
+go run .\cmd
+```
